@@ -232,12 +232,12 @@ public class Crearencuesta extends javax.swing.JFrame {
             cuadrosVacios.setLocationRelativeTo(null);
             cuadrosVacios.setVisible(true);
         } else {
-            //MensajeContra modelContrasena = new MensajeContra(this, true, "Cree una contraseña para administrar el formulario");
-            //modelContrasena.setLocationRelativeTo(null);
-            //modelContrasena.setVisible(true);
-            if (true/*modelContrasena.isAceptado()*/) {
+            MensajeContra modelContrasena = new MensajeContra(this, true, "Cree una contraseña para administrar el formulario");
+            modelContrasena.setLocationRelativeTo(null);
+            modelContrasena.setVisible(true);
+            if (modelContrasena.isAceptado()) {
                 // Obtiene la contraseña ingresada
-                String contrasena = "1234567a";//modelContrasena.getContraseñaIngresada();
+                String contrasena = modelContrasena.getContraseñaIngresada();
                 
                 try {
                     // Cargar el controlador JDBC
@@ -322,9 +322,9 @@ public class Crearencuesta extends javax.swing.JFrame {
                                 MensajeDialog formularioCreado = new MensajeDialog(this, true, "El formulario se creó con éxito");
                                 formularioCreado.setLocationRelativeTo(null);
                                 formularioCreado.setVisible(true);
-                                //mostrarIdEncuesta mostrarID = new mostrarIdEncuesta(this, true, "Comparte el código de tu encuesta para que otros puedan responderla", String.valueOf(idFormulario));
-                                //mostrarID.setLocationRelativeTo(null);
-                                //mostrarID.setVisible(true);
+                                mostrarIdEncuesta mostrarID = new mostrarIdEncuesta(this, true, "Comparte el código de tu encuesta para que otros puedan responderla", String.valueOf(idFormulario));
+                                mostrarID.setLocationRelativeTo(null);
+                                mostrarID.setVisible(true);
                                 preguntas.clear();
                                 this.dispose();
                                 SeleccionPrograma ventanaInicial = new SeleccionPrograma();

@@ -129,7 +129,6 @@ public class SeleccionPrograma extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        /*
         if(jTextField1.getText().isBlank()) {
             jLabel2.setText("¡Este campo es necesario!");
             jLabel3.setText("");
@@ -167,45 +166,11 @@ public class SeleccionPrograma extends javax.swing.JFrame {
                 System.err.println("Error al conectar a la base de datos: " + e.getMessage());
             }
         }
-        */
-        
-        
-        // Obtener la última encuesta creada
-        
-        try (Connection conexion = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
-            // Consulta SQL parametrizada
-            String sql = "SELECT idencuesta, titulo, descripcion FROM encuesta ORDER BY tiempoCreacion DESC LIMIT 1";
-
-            // Crear el PreparedStatement
-            try (PreparedStatement statement = conexion.prepareStatement(sql)) {
-
-                // Ejecutar la consulta
-                try (ResultSet resultSet = statement.executeQuery()) {
-                    if (resultSet.next()) {
-                        // Hay al menos una coincidencia
-                        // Puedes acceder a los datos del resultado aquí si es necesario
-                        this.dispose();
-                        ListaPreguntas encuestaAResponder = new ListaPreguntas(resultSet.getString("idencuesta"), resultSet.getString("titulo"), resultSet.getString("descripcion"));
-                        encuestaAResponder.setLocationRelativeTo(null);
-                        encuestaAResponder.setVisible(true);
-                    } else {
-                        // No hay coincidencias
-                        MensajeDialog mensajeError = new MensajeDialog(this, true, "No existe una encuesta con ese código");
-                        mensajeError.setLocationRelativeTo(null);
-                        mensajeError.setVisible(true);
-                    }
-                }
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Error al conectar a la base de datos: " + e.getMessage());
-        }
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        /*
+
         if(!jTextField1.getText().isBlank() && !new String(jPasswordField1.getPassword()).isBlank()) {
             jLabel2.setText("");
             jLabel3.setText("");
@@ -256,46 +221,8 @@ public class SeleccionPrograma extends javax.swing.JFrame {
         } else {
             jLabel2.setText(jTextField1.getText().isBlank() ? "¡Este campo es necesario!" : "");
             jLabel3.setText(new String(jPasswordField1.getPassword()).isBlank() ? "¡Este campo es necesario!" : "");
-        }
-        */
-        
-        // Obtener la última encuesta creada
-        
-        try (Connection conexion = DriverManager.getConnection(URL, USERNAME, PASSWORD)) {
-            // Consulta SQL parametrizada
-            String sql = "SELECT idencuesta, titulo, descripcion FROM encuesta ORDER BY tiempoCreacion DESC LIMIT 1";
-
-            // Crear el PreparedStatement
-            try (PreparedStatement statement = conexion.prepareStatement(sql)) {
-
-                // Ejecutar la consulta
-                try (ResultSet resultSet = statement.executeQuery()) {
-                    
-                    
-                    
-                    if (resultSet.next()) {
-                        // Hay al menos una coincidencia
-                        // Puedes acceder a los datos del resultado aquí si es necesario
-                        String codigoEncuesta = resultSet.getString("idencuesta");
-                        String titulo = resultSet.getString("titulo");
-                        String descripcion = resultSet.getString("descripcion");
-                        
-                        VerRespuestas ventanaAnalisis = new VerRespuestas(codigoEncuesta, titulo, descripcion);
-                        ventanaAnalisis.setLocationRelativeTo(null);
-                        ventanaAnalisis.setVisible(true);
-                        this.dispose();
-                    } else {
-                        // No hay coincidencias
-                        MensajeDialog mensajeError = new MensajeDialog(this, true, "No existe una encuesta con ese código");
-                        mensajeError.setLocationRelativeTo(null);
-                        mensajeError.setVisible(true);
-                    }
-                }
-            }
-
-        } catch (SQLException e) {
-            System.err.println("Error al conectar a la base de datos: " + e.getMessage());
-        }
+        }    
+       
         
     }//GEN-LAST:event_jButton3ActionPerformed
 
